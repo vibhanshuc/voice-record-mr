@@ -1,5 +1,5 @@
-AudioContext = AudioContext || webkitAudioContext || mozAudioContext;
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+// var AudioContext = window.AudioContext || webkitAudioContext || mozAudioContext;
+// navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
 var Recorder = function( config ){
 
@@ -30,17 +30,16 @@ var Recorder = function( config ){
   this.eventTarget = document.createDocumentFragment();
   this.createAudioNodes();
   this.initStream();
+  this.audioContext = config.audioContext;
 };
 
 Recorder.isRecordingSupported = function(){
-  return AudioContext && navigator.getUserMedia;
+  return this.audioContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
 };
 
 Recorder.prototype.addEventListener = function( type, listener, useCapture ){
   this.eventTarget.addEventListener( type, listener, useCapture );
 };
-
-Recorder.prototype.audioContext = new AudioContext();
 
 Recorder.prototype.createAudioNodes = function(){
   var that = this;
@@ -73,19 +72,18 @@ Recorder.prototype.createButterworthFilter = function(){
 
 Recorder.prototype.initStream = function(){
   var that = this;
-  navigator.getUserMedia(
-    { audio : this.config.streamOptions },
-    function ( stream ) {
+  navigator.mediaDevices.getUserMedia(
+    { audio : this.config.streamOptions }
+  ).then(function ( stream ) {
       that.stream = stream;
       that.sourceNode = that.audioContext.createMediaStreamSource( stream );
       that.sourceNode.connect( that.filterNode || that.scriptProcessorNode );
       that.sourceNode.connect( that.monitorNode );
       that.eventTarget.dispatchEvent( new Event( "streamReady" ) );
-    },
-    function ( e ) { 
-      that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
     }
-  );
+  ).catch(function ( e ) { 
+    that.eventTarget.dispatchEvent( new ErrorEvent( "streamError", { error: e } ) );
+  });
 };
 
 Recorder.prototype.pause = function(){

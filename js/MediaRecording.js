@@ -20,13 +20,14 @@
 export default class MediaRecording {
 
   constructor() {
+    const audioContext = new(window.AudioContext || window.webKitAudioContext || window.mozAudioContext)();
 
     this.usesMediaRecorder = ('MediaRecorder' in window &&
       typeof MediaRecorder.canRecordMimeType === 'undefined');
 
     this.recorder = this.usesMediaRecorder ?
-      new MRRecorder() :
-      new LegacyRecorder();
+      new MRRecorder(audioContext) :
+      new LegacyRecorder(audioContext);
 
     console.log(this.recorder);
   }
@@ -42,7 +43,7 @@ export default class MediaRecording {
 
 class MRRecorder {
 
-  constructor() {
+  constructor(audioContext) {
 
     console.log('Using MediaRecorder API.');
 
@@ -50,7 +51,7 @@ class MRRecorder {
     this.recorder = null;
     this.stream = null;
     this.recordedData = [];
-    this.audioContext = new(window.AudioContext || window.webKitAudioContext || window.mozAudioContext)();
+    this.audioContext = audioContext;
 
     console.log(this.audioContext);
 
@@ -127,10 +128,10 @@ class MRRecorder {
 
 class LegacyRecorder {
 
-  constructor() {
+  constructor(audioContext) {
 
     console.log('Using legacy recorder.');
-
+    this.audioContext = audioContext;
     this.recorder = null;
     this.deletePendingRecording = false;
 
