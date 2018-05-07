@@ -36,6 +36,8 @@ const startRecording = () => {
             for (var d = 0; d < volumeData.length; d++) {
                 volumeData[d] /= volumeMax;
             }
+            const audioURL = window.URL.createObjectURL(audioData);
+            addAudioClip(audioURL);
 
         })
         .catch(err => {
@@ -54,11 +56,6 @@ const stopRecording = () => {
 
     mediaRecording.stop(deletePendingRecording);
     deletePendingRecording = false;
-    const blob = new window.Blob(mediaRecording.recorder.recordedData, {
-        type: 'audio/webm'
-    });
-    const audioURL = window.URL.createObjectURL(blob);
-    addAudioClip(audioURL);
 
 };
 

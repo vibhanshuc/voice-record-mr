@@ -1,5 +1,6 @@
 var path = require('path');
 var commonConfig = require('./webpack.common.config');
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var output = {
@@ -9,5 +10,13 @@ var output = {
 };
 
 module.exports = Object.assign(commonConfig, {
-    output: output
+    output: output,
+    plugins: [
+        new CopyWebpackPlugin([{
+            from: './js/Recorderjs/',
+            to: './'
+        }], {
+            debug: true
+        })
+    ]
 });

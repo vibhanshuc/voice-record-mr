@@ -17,7 +17,7 @@
 
 /* global MediaRecorder, Recorder */
 import './mediaDevices-getUserMedia-polyfill';
-import Recorder from './Recorderjs/recorder';
+import Recorder from './recorder';
 
 export default class MediaRecording {
 
@@ -28,10 +28,8 @@ export default class MediaRecording {
       typeof MediaRecorder.canRecordMimeType === 'undefined');
 
     this.recorder = this.usesMediaRecorder ?
-      new MRRecorder(audioContext) :
+      new LegacyRecorder(audioContext) :
       new LegacyRecorder(audioContext);
-
-    console.log(this.recorder);
   }
 
   get complete() {
@@ -144,7 +142,7 @@ class LegacyRecorder {
     this.complete = new Promise((resolve, reject) => {
 
       this.recorder = new Recorder({
-        workerPath: 'Recorderjs/recorderWorker.js',
+        workerPath: 'build/recorderWorker.js',
         recordOpus: false,
         audioContext: this.audioContext
       });
