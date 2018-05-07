@@ -141,7 +141,8 @@ class LegacyRecorder {
 
       this.recorder = new Recorder({
         workerPath: 'Recorderjs/recorderWorker.js',
-        recordOpus: false
+        recordOpus: false,
+        audioContext: this.audioContext
       });
 
       this.recorder.addEventListener('dataAvailable', evt => {
