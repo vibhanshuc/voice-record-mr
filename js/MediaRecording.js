@@ -20,7 +20,7 @@
 export default class MediaRecording {
 
   constructor() {
-    const audioContext = new(window.AudioContext || window.webKitAudioContext || window.mozAudioContext)();
+    const audioContext = new(window.AudioContext || window.webkitAudioContext || window.mozAudioContext)();
 
     this.usesMediaRecorder = ('MediaRecorder' in window &&
       typeof MediaRecorder.canRecordMimeType === 'undefined');
