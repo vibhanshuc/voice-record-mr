@@ -34,6 +34,7 @@ var Recorder = function( config ){
 };
 
 Recorder.isRecordingSupported = function(){
+  console.log(this.audioContext, navigator.mediaDevices.getUserMedia)
   return this.audioContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
 };
 
