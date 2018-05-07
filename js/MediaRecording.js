@@ -53,7 +53,7 @@ class MRRecorder {
     this.recordedData = [];
     this.audioContext = audioContext;
 
-    console.log(this.audioContext);
+    console.log(this.recorder, 'uma');
 
     this.sourceNode = undefined;
 
@@ -98,7 +98,7 @@ class MRRecorder {
           tracks.forEach(track => track.stop());
 
           let audioData = new Blob(this.recordedData, {
-            type: 'audio/webm'
+            type: 'audio/webm;'
           });
 
           if (this.deletePendingRecording) {
