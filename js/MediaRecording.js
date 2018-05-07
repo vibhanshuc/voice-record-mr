@@ -28,7 +28,7 @@ export default class MediaRecording {
       typeof MediaRecorder.canRecordMimeType === 'undefined');
 
     this.recorder = this.usesMediaRecorder ?
-      new LegacyRecorder(audioContext) :
+      new MRRecorder(audioContext) :
       new LegacyRecorder(audioContext);
   }
 
