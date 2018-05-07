@@ -93,6 +93,7 @@ const stopRecording = () => {
     });
     const audioURL = window.URL.createObjectURL(blob);
     addAudioClip(audioURL);
+    
 };
 
 
