@@ -17,6 +17,8 @@
 
 /* global MediaRecorder, Recorder */
 
+import Recorder from './Recorderjs/recorder';
+
 export default class MediaRecording {
 
   constructor() {
@@ -138,7 +140,7 @@ class LegacyRecorder {
     this.complete = new Promise((resolve, reject) => {
 
       this.recorder = new Recorder({
-        workerPath: 'third_party/Recorderjs/recorderWorker.js',
+        workerPath: 'Recorderjs/recorderWorker.js',
         recordOpus: false
       });
 

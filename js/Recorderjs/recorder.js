@@ -169,3 +169,5 @@ Recorder.prototype.stop = function(){
     this.worker.postMessage({ command: "stop" });
   }
 };
+
+export default Recorder;
