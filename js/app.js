@@ -1,40 +1,10 @@
-import '../css/app.scss';
-
 import MediaRecording from './MediaRecording';
 
-// const audioContext = new(AudioContext || webKitAudioContext || mozAudioContext);
 let mediaRecorder;
 
 let deletePendingRecording;
 let recording;
 let mediaRecording;
-
-// const init = () => {
-//     let chunks = [];
-//     navigator.mediaDevices.getUserMedia({
-//             audio: true
-//         })
-//         .then((stream) => {
-//             console.log(stream);
-//             mediaRecorder = new window.MediaRecorder(stream);
-
-//             mediaRecorder.onstop = () => {
-//                 const blob = new window.Blob(chunks, {
-//                     type: 'audio/ogg; codecs=opus'
-//                 });
-//                 chunks = [];
-//                 const audioURL = window.URL.createObjectURL(blob);
-//                 addAudioClip(audioURL);
-//             };
-
-//             mediaRecorder.ondataavailable = (e) => {
-//                 chunks.push(e.data);
-//             };
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-// };
 
 const addAudioClip = (url) => {
     const audio = document.createElement('audio');
@@ -93,5 +63,6 @@ const stopRecording = () => {
 };
 
 
-$('#start-button').on('click', startRecording);
-$('#stop-button').on('click', stopRecording);
+document.getElementById('start-button').addEventListener('click', startRecording);
+
+document.getElementById('stop-button').addEventListener('click', stopRecording);

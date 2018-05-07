@@ -68,12 +68,16 @@ class MRRecorder {
 
       let onStreamSuccess = stream => {
 
+        console.log(this);
+
         this.stream = stream;
         this.sourceNode = this.audioContext.createMediaStreamSource(stream);
 
-        this.recorder = new MediaRecorder(stream, {
-          mimeType: 'audio/webm'
-        });
+        try {
+          this.recorder = new MediaRecorder(stream);
+        } catch (e) {
+          throw new Error('Unsupported mime/type');
+        }
 
         this.recorder.addEventListener('error', evt => {
           reject(evt);
