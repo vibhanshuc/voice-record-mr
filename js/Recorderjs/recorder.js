@@ -3,6 +3,8 @@
 
 var Recorder = function( config ){
 
+  console.log(config);
+
   if ( !Recorder.isRecordingSupported() ) {
     throw "Recording is not supported in this browser";
   }
