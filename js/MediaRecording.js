@@ -50,7 +50,9 @@ class MRRecorder {
     this.recorder = null;
     this.stream = null;
     this.recordedData = [];
-    this.audioContext = new(AudioContext || webKitAudioContext || mozAudioContext)();
+    this.audioContext = new(window.AudioContext || window.webKitAudioContext || window.mozAudioContext)();
+
+    console.log(this.audioContext);
 
     this.sourceNode = undefined;
 
