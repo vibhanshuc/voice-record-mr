@@ -49,6 +49,8 @@ const addAudioClip = (url) => {
 
 const startRecording = () => {
 
+    alert('start recording');
+
     if (recording)
         return;
 
@@ -72,6 +74,7 @@ const startRecording = () => {
         })
         .catch(err => {
             console.log('stop rec', err);
+            alert(err);
             deletePendingRecording = true;
             stopRecording();
         });
