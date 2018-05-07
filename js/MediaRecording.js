@@ -28,7 +28,7 @@ export default class MediaRecording {
       new MRRecorder() :
       new LegacyRecorder();
 
-      console.log(this.recorder);
+    console.log(this.recorder);
   }
 
   get complete() {
@@ -50,7 +50,8 @@ class MRRecorder {
     this.recorder = null;
     this.stream = null;
     this.recordedData = [];
-    this.audioContext = new AudioContext();
+    this.audioContext = new(AudioContext || webKitAudioContext || mozAudioContext)();
+
     this.sourceNode = undefined;
 
     this.complete = new Promise((resolve, reject) => {
