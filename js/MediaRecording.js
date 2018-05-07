@@ -16,7 +16,7 @@
  */
 
 /* global MediaRecorder, Recorder */
-
+import './mediaDevices-getUserMedia-polyfill';
 import Recorder from './Recorderjs/recorder';
 
 export default class MediaRecording {

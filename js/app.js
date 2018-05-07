@@ -1,8 +1,4 @@
 import '../css/app.scss';
-import $ from "jquery";
-import './mediaDevices-getUserMedia-polyfill';
-import './Recorderjs/recorder';
-// import './Recorderjs/recorderWorker';
 
 import MediaRecording from './MediaRecording';
 
@@ -93,7 +89,7 @@ const stopRecording = () => {
     });
     const audioURL = window.URL.createObjectURL(blob);
     addAudioClip(audioURL);
-    
+
 };
 
 
