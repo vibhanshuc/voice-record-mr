@@ -43,6 +43,8 @@ const startRecording = () => {
             }
             const audioURL = window.URL.createObjectURL(audioData);
             addAudioClip(audioURL);
+            const file = new File([audioData], 'output', { type: 'audio/wav'});
+            alert(file.type);
 
         })
         .catch(err => {
