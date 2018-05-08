@@ -98,7 +98,7 @@ class MRRecorder {
           tracks.forEach(track => track.stop());
 
           let audioData = new Blob(this.recordedData, {
-            type: 'audio/webm;'
+            type: 'audio/wav;'
           });
 
           if (this.deletePendingRecording) {
