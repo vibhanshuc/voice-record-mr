@@ -16,9 +16,6 @@ const addAudioClip = (url) => {
     link.innerText = 'download';
     link.download = true;
     document.body.appendChild(link);
-    const click = document.createEvent('event');
-    click.initEvent('click', true, true);
-    link.dispatchEvent(click);
 };
 
 const startRecording = () => {
